@@ -313,10 +313,12 @@ abstract class AbstractPart
         if (0 === $textRunContainers) {
             $parent->addTextBreak(null, $paragraphStyle);
         } else {
-            $nodes = $xmlReader->getElements('*', $domNode);
-            $paragraph = $parent->addTextRun($paragraphStyle);
-            foreach ($nodes as $node) {
-                $this->readRun($xmlReader, $node, $paragraph, $docPart, $paragraphStyle);
+            if(!$xmlReader->elementExists('w:r/w:fldChar/w:ffData', $domNode)) {
+                $nodes = $xmlReader->getElements('*', $domNode);
+                $paragraph = $parent->addTextRun($paragraphStyle);
+                foreach ($nodes as $node) {
+                    $this->readRun($xmlReader, $node, $paragraph, $docPart, $paragraphStyle);
+                }
             }
         }
     }
