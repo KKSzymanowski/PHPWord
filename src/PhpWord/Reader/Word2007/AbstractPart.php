@@ -223,6 +223,8 @@ abstract class AbstractPart
                         $partOfFormField = false;
                         // Process the form fields
                         $this->readFormField($xmlReader, $formNodes, $paragraph, $paragraphStyle, $formType);
+                        $formNodes = [];
+                        $formType = null;
                     } elseif ($partOfFormField) {
                         $formNodes[] = $node;
                     } else {
